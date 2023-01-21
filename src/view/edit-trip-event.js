@@ -1,8 +1,9 @@
 import {createElement} from '../render.js';
+import {html} from '../utils.js';
 
 function createEditTripEventTemplate() {
   return (
-    `
+    html`
     <li class="trip-events__item">
       <form class="event event--edit" action="#" method="post">
         <header class="event__header">

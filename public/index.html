@@ -10,6 +10,7 @@
   </head>
 
   <body class="page-body">
+    <hello-world></hello-world>
     <header class="page-header">
       <div class="page-body__container  page-header__container">
         <img class="page-header__logo" src="img/logo.png" width="42" height="42" alt="Trip logo">
@@ -26,6 +27,7 @@
             <div class="trip-controls__filters">
               <h2 class="visually-hidden">Filter events</h2>
               <!-- Фильтры -->
+              <filter-view></filterView>
             </div>
           </div>
 
@@ -38,8 +40,14 @@
             <h2 class="visually-hidden">Trip events</h2>
 
             <!-- Сортировка -->
-
+            <sort-view class="trip-events__trip-sort"></sort-view>
             <!-- Контент -->
+            <new-point-editor-view></new-point-editor-view>
+            <list-view class="trip-events__list">
+              <point-view></point-view>
+              <point-view></point-view>
+              <point-view></point-view>
+            </list-view>
           </section>
       </div>
     </main>
