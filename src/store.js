@@ -1,12 +1,13 @@
 /**
- * @template Item
+ * @template Item - тип объекта для хранения
  */
 export default class Store {
   #base;
   #auth;
   /**
-   * @param {string} base
-   * @param {string} auth
+   * @constructor
+   * @param {string} base - основной URL
+   * @param {string} auth - заголовок Authorization
    */
   constructor(base, auth) {
     this.#base = base;
@@ -14,7 +15,8 @@ export default class Store {
   }
 
   /**
-   * @return {Promise<Item[]>}
+   * GET-запрос к основному URL
+   * @return {Promise<Item[]>} - массив точек маршрута (Point)
    */
   list() {
     return this.request('/', {
@@ -23,8 +25,9 @@ export default class Store {
   }
 
   /**
-  * @param {Omit<Item, 'id'>} item
-  * @return {Promise<Item>}
+   * POST-запрос на добавление точки маршрута
+  * @param {Omit<Item, 'id'>} item - точка маршрута без ИД (LocalPoint)
+  * @return {Promise<Item>} - точка маршрута (Point)
   */
   add(item) {
     return this.request('/', {
@@ -34,8 +37,9 @@ export default class Store {
   }
 
   /**
-   * @param {Item} item
-   * @return {Promise<Item>}
+   * PUT-запрос на редактирование точки маршрута
+   * @param {Item} item - точка маршрута
+   * @return {Promise<Item>} - обновленная точка маршрута (Point)
    */
   update(item) {
     // @ts-ignore
@@ -46,8 +50,9 @@ export default class Store {
   }
 
   /**
-   * @param {string} id
-   * @return {Promise<string>}
+   * DELETE-запрос на удаление точки маршрута
+   * @param {string} id - ИД точки маршрута
+   * @return {Promise<string>} - текст "ОК"
    */
   delete(id) {
     return this.request(`/${id}`, {
@@ -57,7 +62,7 @@ export default class Store {
 
   /**
    *
-   * @param {string} path
+   * @param {string} path - дополнительный путь к основному
    * @param {RequestInit} options
    */
   async request(path, options = {}) {
@@ -68,23 +73,25 @@ export default class Store {
     };
 
     const response = await fetch(this.#base + path, {...options, headers});
-    const {assert, parse} = /** @type {typeof Store} */ (this.constructor);
+    const {assert, parse} = /** @type {typeof Store} */ (this.constructor);//TODO Почему нельзя использовать Store.assert, Store.parse ?
 
     await assert(response);
     return parse(response);
   }
 
   /**
-  * @param {Response} response
+   * Проверка успешности ответа от сервера
+  * @param {Response} response - ответ от сервера
   */
-  static async assert(response) {
+  static async assert(response) {//TODO Зачем возвращать пустой промис?
     if (!response.ok) {
       throw new Error(`${response.status} - ${response.statusText}`);
     }
   }
 
   /**
-   * @param {Response} response
+   * Преобразование ответа в JSON или текст
+   * @param {Response} response - ответ от сервера
    */
   static parse(response) {
     if (response.headers.get('content-type').startsWith('application/json')) {
