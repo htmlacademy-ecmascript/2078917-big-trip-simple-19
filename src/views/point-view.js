@@ -2,46 +2,70 @@ import View from './view';
 import {html} from '../utils';
 
 export default class PointView extends View {
-  constructor() {
-    super();
+
+  /**
+  * @param {PointViewState} state
+  */
+  constructor(state) {
+    super(state);
 
     this.classList.add('trip-events__item');
+    this.setOffers(state.offers);
   }
 
   /**
    * @override
+   * @param {PointViewState} state
    */
-  createHtml() {
+  createHtml(state) {
     return html`
       <div class="event">
-        <time class="event__date" datetime="2019-03-18">MAR 18</time>
+        <time class="event__date" datetime=${state.startDate}>${state.date}</time>
         <div class="event__type">
-          <img class="event__type-icon" width="42" height="42" src="img/icons/taxi.png" alt="Event type icon">
+          <img class="event__type-icon" width="42" height="42" src=${state.icon} alt="Event type icon">
         </div>
-        <h3 class="event__title">Taxi Amsterdam</h3>
+        <h3 class="event__title">${state.title}</h3>
         <div class="event__schedule">
           <p class="event__time">
-            <time class="event__start-time" datetime="2019-03-18T10:30">10:30</time>
+            <time class="event__start-time" datetime=${state.startDate}>${state.startTime}</time>
             &mdash;
-            <time class="event__end-time" datetime="2019-03-18T11:00">11:00</time>
+            <time class="event__end-time" datetime=${state.startDate}>${state.endTime}</time>
           </p>
         </div>
         <p class="event__price">
-          &euro;&nbsp;<span class="event__price-value">20</span>
+          &euro;&nbsp;<span class="event__price-value">${state.basePrice}</span>
         </p>
         <h4 class="visually-hidden">Offers:</h4>
         <ul class="event__selected-offers">
-          <li class="event__offer">
-            <span class="event__offer-title">Order Uber</span>
-            &plus;&euro;&nbsp;
-            <span class="event__offer-price">20</span>
-          </li>
+
         </ul>
         <button class="event__rollup-btn" type="button">
           <span class="visually-hidden">Open event</span>
         </button>
       </div>
     `;
+  }
+
+  /**
+* @param {OfferViewState} state
+*/
+  createOfferHtml(state) {
+    return html`
+      <li class="event__offer">
+        <span class="event__offer-title">${state.title}</span>
+        &plus;&euro;&nbsp;
+        <span class="event__offer-price">${state.price}</span>
+      </li>
+    `;
+  }
+
+  /**
+   * @param {OfferViewState[]} states
+   */
+  setOffers(states) {
+    const offersHtml = states.map(this.createOfferHtml).join('');
+
+    this.querySelector('.event__selected-offers').innerHTML = offersHtml;
   }
 }
 
