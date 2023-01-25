@@ -55,7 +55,7 @@ const models = [pointsModel, destinationsModel, offerGroupsModel];
 const listView = document.querySelector(String(ListView));
 
 
-const {log, table} = console;
+const {log/*, table*/} = console;
 
 Promise.all(
   models.map((model) => model.ready())
