@@ -1,7 +1,7 @@
 import './views/hello-world';
 import './views/filter-view';
 import './views/sort-view';
-import './views/list-view';
+import ListView from './views/list-view';
 import './views/point-view';
 import './views/point-view.css';
 import './views/new-point-editor-view';
@@ -15,6 +15,8 @@ import OfferGroupAdapter from './adapters/offer-group-adapter';
 
 import {FilterType, SortType} from './enums';
 import {filterCallbackMap, sortCallbackMap} from './maps';
+
+import ListPresenter from './presenters/list-presenter';
 
 const BASE = 'https://19.ecmascript.pages.academy/big-trip-simple';
 const AUTH = 'Basic er882jdzhcw';
@@ -50,13 +52,17 @@ const pointsModel = new CollectionModel({
 
 const models = [pointsModel, destinationsModel, offerGroupsModel];
 
+const listView = document.querySelector(String(ListView));
+
+
 const {log, table} = console;
 
 Promise.all(
   models.map((model) => model.ready())
 )
   .then(async () => {
-    table(pointsModel.list());
+    new ListPresenter(listView, models);
+    // table(pointsModel.list());
     // log('Points', pointsModel.listAll());
     // log('Point id=1', pointsModel.item(1));
     // log('Point id=2', pointsModel.findById('2'));
