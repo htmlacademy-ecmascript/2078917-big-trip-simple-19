@@ -7,12 +7,54 @@ import BasePriceView from './common/base-price-view';
 import OffersView from './common/offers-view';
 import DestinationDetailsView from './common/destination-details-view';
 import './common/offers-view.css';
+import {saveButtonTextMap} from '../maps';
+import UiBlockerView from './ui-blocker-view';
 
+/**
+ * @implements {EventListenerObject}
+ */
 export default class NewPointEditorView extends View {
-  constructor() {
+  constructor(listView) {
     super();
 
-    this.classList.add('trip-events__item');
+    this.classList.add('trip-events__item', 'trip-events__item--edit');
+
+    /**
+     * @type {ListView}
+     */
+    this.listView = listView;
+
+    /**
+     * @type {PointTypeView}
+     */
+    this.pointTypeView = this.querySelector(String(PointTypeView));
+
+    /**
+     * @type {DestinationView}
+     */
+    this.destinationView = this.querySelector(String(DestinationView));
+
+    /**
+     * @type {OffersView}
+     */
+    this.offersView = this.querySelector(String(OffersView));
+
+    /**
+     * @type {DestinationDetailsView}
+     */
+    this.destinationDetailsView = this.querySelector(String(DestinationDetailsView));
+
+    /**
+     * @type {BasePriceView}
+     */
+    this.basePriceView = this.querySelector(String(BasePriceView));
+
+    /**
+     * @type {DatesView}
+     */
+    this.datesView = this.querySelector(String(DatesView));
+
+    this.UBlockerView = new UiBlockerView();
   }
 
   /**
@@ -20,21 +62,67 @@ export default class NewPointEditorView extends View {
    */
   createHtml() {
     return html`
-      <form class="event event--edit" action="#" method="post">
+      <form class="event event--edit" action="#" method="post" novalidate>
         <header class="event__header">
-          <!-- PointTypeView --><${PointTypeView}></${PointTypeView}>
-          <!-- DestinationView --><${DestinationView}></${DestinationView}>
-          <!-- DatesView --><${DatesView}></${DatesView}>
-          <!-- BasePriceView --><${BasePriceView}></${BasePriceView}>
+          <${PointTypeView}></${PointTypeView}>
+          <${DestinationView}></${DestinationView}>
+          <${DatesView}></${DatesView}>
+          <${BasePriceView}></${BasePriceView}>
           <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
           <button class="event__reset-btn" type="reset">Cancel</button>
         </header>
         <section class="event__details">
-          <!-- OffersView --><${OffersView}></${OffersView}>
-          <!-- DestinationDetailsView --><${DestinationDetailsView}></${DestinationDetailsView}>
+          <${OffersView}></${OffersView}>
+          <${DestinationDetailsView}></${DestinationDetailsView}>
         </section>
       </form>
     `;
+  }
+
+  open() {
+    this.listView.prepend(this);
+    this.datesView.createCalendars();
+    this.fadeInRight();
+
+    document.addEventListener('keydown', this);
+  }
+
+  close(notify = true) {
+    this.remove();
+    this.datesView.destroyCalendars();
+
+    document.removeEventListener('keydown', this);
+
+    if (notify) {
+      this.dispatchEvent(new CustomEvent('close'));
+    }
+  }
+
+  /**
+   * @param {boolean} flag True - кнопка нажата
+   */
+  awaitSave(flag) {
+    const text = saveButtonTextMap[Number(flag)];
+
+    this.querySelector('.event__save-btn').textContent = text;
+
+    this.UBlockerView.toggle(flag);
+  }
+
+  /**
+   * @param {string} name
+   */
+  findByName(name) {
+    return this.querySelector('form').elements[name];
+  }
+
+  /**
+   * @param {KeyboardEvent} event
+   */
+  handleEvent(event) {
+    if (event.key === 'Escape') {
+      this.close();
+    }
   }
 }
 

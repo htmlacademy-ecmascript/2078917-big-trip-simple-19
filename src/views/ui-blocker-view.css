@@ -1,7 +1,7 @@
 .ui-blocker {
-  display: none;
+  display: grid;
   place-content: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -21,10 +21,6 @@
              rotate 0.8s linear infinite;
   width: 65px;
   height: 65px;
-}
-
-.ui-blocker--on {
-  display: grid;
 }
 
 @keyframes rotate {
