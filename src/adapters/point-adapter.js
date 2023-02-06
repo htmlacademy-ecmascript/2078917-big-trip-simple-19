@@ -2,7 +2,7 @@ import Adapter from './adapter';
 
 export default class PointAdapter extends Adapter {
   /**
-   * @param {Partial<Point>} data - точка маршрута или его часть
+   * @param {Partial<Point>} data
    */
   constructor(data = {}) {
     super();
@@ -17,7 +17,6 @@ export default class PointAdapter extends Adapter {
   }
 
   /**
-   * Перевод свойств точки маршрута в понятные имена свойств для сотправки их на сервер
    * @override
    * @return {Partial<Point>}
    */

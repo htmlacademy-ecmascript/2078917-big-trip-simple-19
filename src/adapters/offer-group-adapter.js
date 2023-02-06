@@ -8,9 +8,9 @@ export default class OfferGroupAdapter extends Adapter {
     super();
 
     this.id = data.type;
-    this.items = data.offers.map((x) => ({
-      ...x,
-      id: String(x.id)
+    this.items = data.offers.map((item) => ({
+      ...item,
+      id: String(item.id)
     }));
   }
 }

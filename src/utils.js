@@ -25,3 +25,11 @@ export const formatTime = (value) => dayjs(value).format('HH:mm');
  * @param {number} value
  */
 export const formatNumber = (value) => value.toLocaleString('en');
+
+/**
+ * Поиск в массиве ключа с конкретным значением
+ * @param {Record<string, Object>} target
+ * @param {Object} value
+ * @returns {string}
+ */
+export const findKey = (target, value) => Object.keys(target).find((key) => target[key] === value);

@@ -2,8 +2,8 @@ import Model from './model';
 
 /**
  * Модель для взаимодействия с хранилищем
- * @template Item - тип объекта в хранилище
- * @template {Adapter} ItemAdapter - адаптер наследуемый от Store
+ * @template Item
+ * @template {Adapter} ItemAdapter
  */
 export default class CollectionModel extends Model {
   #store;
@@ -33,7 +33,6 @@ export default class CollectionModel extends Model {
   }
 
   /**
-   * Получение коллекции объектов из сервера, запись в локальную коллекцию
    * @override
    */
   async ready() {
@@ -41,8 +40,8 @@ export default class CollectionModel extends Model {
   }
 
   /**
-   * Запонмить фильтр, вызвать событие "filter"
-  * @param {FilterCallback<ItemAdapter>} filter - callback-функция для фильтрации
+  * @param {FilterCallback<ItemAdapter>} filter callback-функция для фильтрации
+  * @param {boolean} notify true - вызвать событие "filter"
   */
   setFilter(filter, notify = true) {
     this.#filter = filter;
@@ -56,8 +55,8 @@ export default class CollectionModel extends Model {
   }
 
   /**
-   * Запонмить сортировку, вызвать событие "sort"
   * @param {SortCallback<ItemAdapter>} sort - callback-функция для сортировки
+  * @param {boolean} notify true - вызвать событие "sort"
   */
   setSort(sort, notify = true) {
     this.#sort = sort;
@@ -71,7 +70,7 @@ export default class CollectionModel extends Model {
   }
 
   /**
-   *
+   * Получить отсортированный, отфильтрованный, адаптированный список точек маршрута из локлаьной коллекции
    * @param {FilterCallback<ItemAdapter>} filter - callback-функция для фильрации, задана по умолчанию
    * @param {SortCallback<ItemAdapter>} sort - callback-функция для сортировки, задана по умолчанию
    * @returns ItemAdapter[] - отсортированный, отфильтрованный, адаптированный локальная коллекция
@@ -84,17 +83,16 @@ export default class CollectionModel extends Model {
   }
 
   /**
-   * Получить все обекты локальной коллекции
-   * @returns адаптированная локальная коллекция
+   * Получить адаптированный массив точек маршрута из локальной коллекции
+   * @returns адаптированный массив точек маршрута
    */
   listAll() {
     return this.#items.map(this.#adapt);
   }
 
   /**
-   * Получить объект по ИД локальной коллекции
-  * @param {number} [index] - индекс локальной коллекции
-  * @returns {ItemAdapter} - адаптированный объект из локальной коллекции
+  * @param {number} [index]
+  * @returns {ItemAdapter}
   */
   item(index) {
     if (arguments.length) {
@@ -109,7 +107,7 @@ export default class CollectionModel extends Model {
    * @param {*} value
    */
   findBy(key, value) {
-    return this.listAll().find((x) => x[key] === value);
+    return this.listAll().find((item) => item[key] === value);
   }
 
   /**
@@ -124,7 +122,7 @@ export default class CollectionModel extends Model {
   * @param {*} value
   */
   findIndexBy(key, value) {
-    return this.listAll().findIndex((x) => x[key] === value);
+    return this.listAll().findIndex((item) => item[key] === value);
   }
 
   /**
