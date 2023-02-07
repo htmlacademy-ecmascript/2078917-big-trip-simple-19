@@ -4,7 +4,6 @@ import Presenter from './presenter';
 
 /**
  * @extends {Presenter<ListView>}
- * Представление для списка точек маршрута
  */
 export default class ListPresenter extends Presenter {
   constructor() {
@@ -20,7 +19,7 @@ export default class ListPresenter extends Presenter {
   }
 
   /**
-   * Обновляет точки маршурута из локальной коллекции модели
+   * Обновляет точки маршрута из локальной коллекции модели
    * @param {PointAdapter} [targetPoint]
    */
   updateView(targetPoint) {

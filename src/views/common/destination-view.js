@@ -25,7 +25,7 @@ export default class DestinationView extends View {
   }
 
   /**
-   * Возвращает html -разметку списка мест назначения по переданным параметрам
+   * Возвращает html-разметку пункта назначения
    * @param {OptionViewState} state
    */
   createOptionHtml(state) {
@@ -35,8 +35,8 @@ export default class DestinationView extends View {
   }
 
   /**
-   * Создает список мест назначений по переданному массиву параметров и записывает в элемент destination-view
-   * @param {OptionViewState[]} states Массив с информацией о типах точек маршрута
+   * Создает список пунктов назначений и записывает в элемент destination-view
+   * @param {OptionViewState[]} states Пункты назначения
    */
   setOptions(states) {
     const optionsHtml = states.map(this.createOptionHtml).join('');

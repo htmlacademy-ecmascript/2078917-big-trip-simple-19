@@ -1,10 +1,10 @@
 import View from './view';
 import {html} from '../utils';
+import './point-view.css';
 
 export default class PointView extends View {
 
   /**
-   * @constructor
    * @param {PointViewState} state Объект с состояниями точки маршрута
    */
   constructor(state) {
@@ -21,7 +21,7 @@ export default class PointView extends View {
    * Создать html-разметку точки маршрута
    * @override
    * @param {PointViewState} state Объект с состояниями точки маршрута
-   * @returns {String} html разметка точки маршрута
+   * @returns {string} html разметка точки маршрута
    */
   createHtml(state) {
     return html`
@@ -57,7 +57,7 @@ export default class PointView extends View {
   /**
    * Создать html-разметку опции для точки маршрута
    * @param {OfferViewState} state Список опций
-   * @returns {String} html разметка опции
+   * @returns {string} html разметка опции
 */
   createOfferHtml(state) {
     return html`

@@ -50,7 +50,7 @@ export default class PointEditorView extends NewPointEditorView {
 
     this.querySelector('.event__reset-btn').textContent = text;
 
-    this.UBlockerView.toggle(flag);
+    this.uBlockerView.toggle(flag);
   }
 
   /**

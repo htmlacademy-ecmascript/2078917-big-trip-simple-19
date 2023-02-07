@@ -5,7 +5,6 @@ import Presenter from './presenter';
 
 /**
  * @extends {Presenter<FilterView>}
- * Представление для списка фильтров
  */
 export default class FilterPresenter extends Presenter {
 
