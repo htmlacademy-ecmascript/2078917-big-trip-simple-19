@@ -31,7 +31,7 @@ export default class RadioGroupView extends View {
 
   /**
    * Установить активность всем переключателям
-   * @param {boolean[]} flags Булевый массив, где true - переключатель активен, false - не активен
+   * @param {boolean[]} flags true - переключатель неактивен, false - активен
    */
   setDisability(flags) {
 

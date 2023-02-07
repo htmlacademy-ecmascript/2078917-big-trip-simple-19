@@ -1,5 +1,6 @@
 import View from '../view';
 import {html} from '../../utils';
+import './offers-view.css';
 
 export default class OffersView extends View {
   constructor() {
@@ -43,7 +44,6 @@ export default class OffersView extends View {
   }
 
   /**
-   *
    * @param {OfferToggleViewState[]} options
    */
   setOptions(options) {

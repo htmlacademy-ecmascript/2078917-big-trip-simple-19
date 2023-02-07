@@ -6,7 +6,6 @@ import DatesView from './common/dates-view';
 import BasePriceView from './common/base-price-view';
 import OffersView from './common/offers-view';
 import DestinationDetailsView from './common/destination-details-view';
-import './common/offers-view.css';
 import {saveButtonTextMap} from '../maps';
 import UiBlockerView from './ui-blocker-view';
 
@@ -54,7 +53,7 @@ export default class NewPointEditorView extends View {
      */
     this.datesView = this.querySelector(String(DatesView));
 
-    this.UBlockerView = new UiBlockerView();
+    this.uBlockerView = new UiBlockerView();
   }
 
   /**
@@ -106,7 +105,7 @@ export default class NewPointEditorView extends View {
 
     this.querySelector('.event__save-btn').textContent = text;
 
-    this.UBlockerView.toggle(flag);
+    this.uBlockerView.toggle(flag);
   }
 
   /**

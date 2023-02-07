@@ -26,7 +26,6 @@ export default class NewPointEditorPresenter extends Presenter {
       'time_24hr': true
     });
 
-
     this.view.addEventListener('submit', this.handleNewPointEditorSubmit.bind(this));
     this.view.addEventListener('reset', this.handleViewReset.bind(this));
     this.view.addEventListener('close', this.handleNewPointEditorClose.bind(this));

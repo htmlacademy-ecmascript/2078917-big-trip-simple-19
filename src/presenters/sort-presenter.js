@@ -5,7 +5,6 @@ import Presenter from './presenter';
 
 /**
  * @extends {Presenter<SortView>}
- * Представление для списка сортировок
  */
 export default class SortPresenter extends Presenter {
 

@@ -1,5 +1,4 @@
 import View from './view';
-import {html} from '../utils';
 import './ui-blocker-view.css';
 
 /**
@@ -10,15 +9,6 @@ export default class UiBlockerView extends View {
     super();
 
     this.classList.add('ui-blocker');
-  }
-
-  /**
-   * @override
-   */
-  createHtml() {
-    return html`
-
-    `;
   }
 
   /**
